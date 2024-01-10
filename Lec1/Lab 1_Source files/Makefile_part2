@@ -1,0 +1,35 @@
+# Targets:
+# target entry to build program executable from main.out
+# Caps.o Clothing.o Pants.o are the object files
+# Targets:
+# main - builds every object files
+# clean - deletes all .o and .out files
+#
+
+CXX = c++
+CXXSOURCE = main.cpp Caps.cpp Clothing.cpp Pants.cpp
+CXXFLAGS = --std= c++14 -O2
+HEADERS = Caps.h Clothing.h Pants.h
+OBJS= main.o Caps.o Clothing.o Pants.o
+
+main:$(CXXSOURCE)
+	$(CXX) $(CFLAGS) -o main $(CXXSOURCE)
+main.o:main.cpp
+	$(CXX) -c main.cpp
+Caps.o:Caps.cpp Caps.h
+	$(CXX) -c Caps.cpp
+Clothing.o:Clothing.cpp Clothing.h
+	$(CXX) -c Clothing.cpp
+Pants.o:Pants.cpp Pants.h
+	$(CXX) -c Pants.cpp
+
+clean:
+	rm -f *.o main.out
+	
+printM:
+	@echo $(CXXSOURCE) $(CXXFLAGS) $(CXX) $(HEADERS) $(OBJS)
+	
+.PHONY: clean
+
+
+
