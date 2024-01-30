@@ -218,6 +218,5 @@ TEST_CASE("Tests"){
                ->subst("x", new Var("y"))
                ->equals(new Mult(new Var("y"), new Num(7))) );
         
-        
     }
 };
