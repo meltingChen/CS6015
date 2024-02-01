@@ -25,6 +25,7 @@ public:
     virtual int interp() = 0;
     virtual bool has_variable() =0;
     virtual Expr* subst(std::string s, Expr* e)=0;
+//    virtual Expr* print(std::ostream& input)=0;
 };
 
 class Num : public Expr {
@@ -35,6 +36,7 @@ public:
     int interp() override;
     bool has_variable()override;
     Expr* subst(std::string s, Expr* e)override;
+//    Expr* print(std::ostream& input)override;
 };
 
 class Add : public Expr {
@@ -45,6 +47,7 @@ public:
     int interp()override;
     bool has_variable()override;
     Expr* subst(std::string s, Expr* e)override;
+//    Expr* print(std::ostream& input)override;
 };
 
 class Mult : public Expr{
@@ -55,6 +58,7 @@ public:
     int interp()override;
     bool has_variable()override;
     Expr* subst(std::string s, Expr* e)override;
+//    Expr* print(std::ostream& input)override;
 };
 
 class Var : public Expr {
@@ -66,6 +70,7 @@ public:
     int interp() override;
     bool has_variable()override;
     Expr* subst(std::string s, Expr* e)override;
+//    Expr* print(std::ostream& input)override;
 };
 
 #endif /* expr_hpp */
