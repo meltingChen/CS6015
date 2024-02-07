@@ -1,4 +1,3 @@
-//
 //  expr.cpp
 //  MSDscript
 //
@@ -6,8 +5,25 @@
 //
 
 #include "expr.hpp"
-#include <stdio.h>
-#include <iostream>
+
+
+std::string Expr::to_string() {
+    // Convert "" to a stringstream object
+    std::stringstream st("");
+    this->print(st);
+    return st.str();
+}
+
+std::string Expr::to_pretty_string() {
+    std::stringstream st("");
+    this->pretty_print(st);
+    return st.str();
+}
+
+void Expr::pretty_print(std::ostream& ot) {
+    pretty_print_at(ot, prec_none);
+    
+}
 
 Num::Num(int val)  {
     this->val = val;
@@ -31,10 +47,22 @@ bool Num::has_variable(){
     return false;
 }
 
+
 Expr* Num::subst(std::string s, Expr* e){
     
     return this;
 }
+
+void Num::print(std::ostream& ot){
+    
+    ot<<std::to_string(val);
+}
+
+void Num::pretty_print_at(std::ostream& ot,precedence_t prec ){
+    this->print(ot);
+}
+
+
 
 Add::Add(Expr *lhs, Expr *rhs){
     this->lhs = lhs;
@@ -66,13 +94,45 @@ bool Add::has_variable(){
 
 Expr* Add::subst(std::string s, Expr* e){
     //think recursively
-    //new Add(new Add(new Num(8), new Num(7)), new Add(new Var("x"), new Num(5))) -> subst("x",new Num(7))
-//    lhs -> subst(s, e);
-//    rhs -> subst(s, e);
     
     return new Add(this->lhs->subst(s, e), this->rhs->subst(s, e)) ;
 }
+
+void Add::print(std::ostream& ot){
     
+    ot << "(";
+    lhs->print(ot);
+    ot << "+";
+    rhs->print(ot);
+    ot << ")";
+    
+}
+
+
+void Add::pretty_print_at(std::ostream& ot,precedence_t prec ) {
+    bool do_print = prec_add <= prec;
+    if(do_print){
+        ot<<"(";
+    }
+    lhs->pretty_print_at(ot, prec_add);
+    ot<<" + ";
+    // operators associate to the right
+    rhs -> pretty_print_at(ot, prec_none);
+    if(do_print){
+        ot<<")";
+    }
+//    std::string result;
+//    if (prec >= prec_add) {
+//        result += "(";
+//    }
+//    result += lhs-> pretty_print(prec_add) + " + " + rhs-> pretty_print(prec_add);
+//    if (prec >= prec_add) {
+//        result += ")";
+//    }
+    
+}
+   
+
 
 
 Mult::Mult(Expr* lhs, Expr* rhs){
@@ -111,6 +171,34 @@ Expr* Mult::subst(std::string s, Expr* e){
     return new Mult(this->lhs->subst(s, e), this->rhs->subst(s, e));
 }
 
+void Mult::print(std::ostream& ot) {
+    ot << "(";
+    lhs->print(ot);
+    ot << "*";
+    rhs->print(ot);
+    ot << ")";
+}
+
+
+void Mult::pretty_print_at(std::ostream& ot,precedence_t prec ) {
+    
+    bool do_print = prec_mult <= prec;
+    if(do_print){
+        ot<<"(";
+    }
+    lhs->pretty_print_at(ot, prec_mult);
+    ot<<" * ";
+    // operators associate to the right
+    rhs->pretty_print_at(ot, prec_add);
+    if(do_print){
+        ot<<")";
+    }
+    
+
+}
+
+
+
 
 Var::Var(std::string name) {
     this -> name = name;
@@ -140,6 +228,16 @@ Expr* Var::subst(std::string s, Expr* e){
     }
     return this;
 }
+
+void Var::print(std::ostream& output) {
+    output << this->name;
+}
+
+void Var::pretty_print_at(std::ostream& ot,precedence_t prec){
+    this->print(ot);
+}
+
+
 
 
 
@@ -218,5 +316,30 @@ TEST_CASE("Tests"){
                ->subst("x", new Var("y"))
                ->equals(new Mult(new Var("y"), new Num(7))) );
         
+    }
+    SECTION("print"){
+        CHECK( (new Num(10))->to_string() == "10" );
+        CHECK( (new Num(0))->to_string() == "0" );
+        CHECK( (new Var("x"))->to_string() == "x" );
+        CHECK( (new Var(""))->to_string() == "" );
+        CHECK( (new Add(new Num(2), new Num(3)))->to_string() == "(2+3)" );
+        CHECK( (new Add(new Num(0), new Num(3)))->to_string() == "(0+3)" );
+        CHECK( (new Mult(new Var("x"), new Num(5)))->to_string() == "(x*5)" );
+        CHECK( (new Add(new Mult(new Var("x"), new Num(5)),new Num(7)))->to_string() == "((x*5)+7)" );
+        CHECK( (new Mult(new Mult(new Var("x"), new Num(5)),new Num(7)))->to_string() == "((x*5)*7)" );
+        CHECK( (new Mult(new Mult(new Var("x"), new Num(5)),new Add(new Num(6),new Num(8))))->to_string() == "((x*5)*(6+8))" );
+    
+    }
+    SECTION("pretty_print"){
+        CHECK ( (new Mult(new Num(1), new Add(new Num(2), new Num(3))))->to_pretty_string() ==  "1 * (2 + 3)" );
+        CHECK ( (new Add(new Num(1), new Mult(new Num(2), new Num(3))))->to_pretty_string() ==  "1 + 2 * 3" );
+        CHECK ( (new Add(new Num(1), new Add(new Num(2), new Num(3))))->to_pretty_string() ==  "1 + 2 + 3" );
+        CHECK ( (new Mult (new Num(2), new Mult (new Num(3), new Num(4))))->to_pretty_string() == "2 * 3 * 4" );
+        CHECK ( (new Mult(new Mult(new Num(8), new Num(1)), new Var("y")))->to_pretty_string() ==  "(8 * 1) * y" );
+        CHECK ( (new Mult(new Add(new Num(3), new Num(5)), new Mult(new Num(6), new Num(1))))->to_pretty_string() ==  "(3 + 5) * 6 * 1" );
+        CHECK ( (new Mult(new Mult(new Num(7), new Num(7)), new Add(new Num(9), new Num(2))) )->to_pretty_string() ==  "(7 * 7) * (9 + 2)" );
+        CHECK ( (new Mult(new Num(7), new Add(new Num(9), new Num(2))) )->to_pretty_string() ==  "7 * (9 + 2)" );
+        CHECK ( (new Add(new Num(7), new Add(new Num(9), new Num(2))) )->to_pretty_string() ==  "7 + 9 + 2" );
+
     }
 };
