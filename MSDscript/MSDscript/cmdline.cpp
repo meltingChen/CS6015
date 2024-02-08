@@ -12,6 +12,11 @@
 
 
 using namespace std;
+/**
+* \brief Define the argument that can be use to in MSDScript progam
+* \param argc the number of input
+* \param argv input
+*/
 void use_arguments(int argc,const char * argv[]){
     bool testTracker = false;// bool
     

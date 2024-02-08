@@ -1,0 +1,187 @@
+\doxysection{Num Class Reference}
+\hypertarget{class_num}{}\label{class_num}\index{Num@{Num}}
+Inheritance diagram for Num\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_num}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_num_a9fce58e650a99ae50f4140ed9c87ec9f}{Num}} (int \mbox{\hyperlink{class_num_ab0654582066deb3adbbd64cf7190a7b7}{val}})
+\begin{DoxyCompactList}\small\item\em Constuctor of \doxylink{class_num}{Num} object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_num_a07316c2897aadb9257b8de74dbfdcc03}{equals}} (\mbox{\hyperlink{class_expr}{Expr}} \texorpdfstring{$\ast$}{*}e) override
+\begin{DoxyCompactList}\small\item\em Compare whether two expression are equal. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_num_a0c55f8227dd834ec1961f745fce2d75e}{interp}} () override
+\begin{DoxyCompactList}\small\item\em Interpret the value. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_num_a24a51278e76d4b01b457fb5f521bcc38}{has\+\_\+variable}} () override
+\begin{DoxyCompactList}\small\item\em To check whether there are any variables in expressions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_expr}{Expr}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_num_af55ca9043b01c85dc636a7efa13e0450}{subst}} (std\+::string s, \mbox{\hyperlink{class_expr}{Expr}} \texorpdfstring{$\ast$}{*}e) override
+\begin{DoxyCompactList}\small\item\em If the first argument exists, it will be substitued with the second argument. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_num_a195a2a68e1cce0d0d691b419e63a82b2}{print}} (std\+::ostream \&ot) override
+\begin{DoxyCompactList}\small\item\em To print out the expression. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_num_a63135565df585c00b72f4a61f95ce118}{pretty\+\_\+print\+\_\+at}} (std\+::ostream \&ot, precedence\+\_\+t prec) override
+\begin{DoxyCompactList}\small\item\em Helper funtion for pretty\+\_\+print to decide where to add parentheses. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_expr}{Expr}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_expr_abe130f37bd185ec13c5113de16fc7bf7}{to\+\_\+string}} ()
+\begin{DoxyCompactList}\small\item\em Print out the result of print() function. \end{DoxyCompactList}\item 
+void {\bfseries pretty\+\_\+print} (std\+::ostream \&ot)
+\begin{DoxyCompactList}\small\item\em Make the format better. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_expr_a6ad7c18234f22d96d6917089b5bd7caa}{to\+\_\+pretty\+\_\+string}} ()
+\begin{DoxyCompactList}\small\item\em Print out the result of \doxylink{class_expr_a747e1f67ac65a4dd86458a03c9caa282}{pretty\+\_\+print()} function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_num_ab0654582066deb3adbbd64cf7190a7b7}\label{class_num_ab0654582066deb3adbbd64cf7190a7b7} 
+int {\bfseries val}
+\begin{DoxyCompactList}\small\item\em the value of a \doxylink{class_num}{Num} object \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_num_a9fce58e650a99ae50f4140ed9c87ec9f}\label{class_num_a9fce58e650a99ae50f4140ed9c87ec9f} 
+\index{Num@{Num}!Num@{Num}}
+\index{Num@{Num}!Num@{Num}}
+\doxysubsubsection{\texorpdfstring{Num()}{Num()}}
+{\footnotesize\ttfamily Num\+::\+Num (\begin{DoxyParamCaption}\item[{int}]{val }\end{DoxyParamCaption})}
+
+
+
+Constuctor of \doxylink{class_num}{Num} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & the value of a \doxylink{class_num}{Num} object \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_num_a07316c2897aadb9257b8de74dbfdcc03}\label{class_num_a07316c2897aadb9257b8de74dbfdcc03} 
+\index{Num@{Num}!equals@{equals}}
+\index{equals@{equals}!Num@{Num}}
+\doxysubsubsection{\texorpdfstring{equals()}{equals()}}
+{\footnotesize\ttfamily bool Num\+::equals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_expr}{Expr}} \texorpdfstring{$\ast$}{*}}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Compare whether two expression are equal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & an expressionto be compared \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_expr}{Expr}}.
+
+\Hypertarget{class_num_a24a51278e76d4b01b457fb5f521bcc38}\label{class_num_a24a51278e76d4b01b457fb5f521bcc38} 
+\index{Num@{Num}!has\_variable@{has\_variable}}
+\index{has\_variable@{has\_variable}!Num@{Num}}
+\doxysubsubsection{\texorpdfstring{has\_variable()}{has\_variable()}}
+{\footnotesize\ttfamily bool Num\+::has\+\_\+variable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+To check whether there are any variables in expressions. 
+
+\begin{DoxyReturn}{Returns}
+boolean 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_expr}{Expr}}.
+
+\Hypertarget{class_num_a0c55f8227dd834ec1961f745fce2d75e}\label{class_num_a0c55f8227dd834ec1961f745fce2d75e} 
+\index{Num@{Num}!interp@{interp}}
+\index{interp@{interp}!Num@{Num}}
+\doxysubsubsection{\texorpdfstring{interp()}{interp()}}
+{\footnotesize\ttfamily int Num\+::interp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Interpret the value. 
+
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_expr}{Expr}}.
+
+\Hypertarget{class_num_a63135565df585c00b72f4a61f95ce118}\label{class_num_a63135565df585c00b72f4a61f95ce118} 
+\index{Num@{Num}!pretty\_print\_at@{pretty\_print\_at}}
+\index{pretty\_print\_at@{pretty\_print\_at}!Num@{Num}}
+\doxysubsubsection{\texorpdfstring{pretty\_print\_at()}{pretty\_print\_at()}}
+{\footnotesize\ttfamily void Num\+::pretty\+\_\+print\+\_\+at (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{ot,  }\item[{precedence\+\_\+t}]{prec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Helper funtion for pretty\+\_\+print to decide where to add parentheses. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ot} & the outputstream to be written \\
+\hline
+{\em prec} & the order of importance \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_expr}{Expr}}.
+
+\Hypertarget{class_num_a195a2a68e1cce0d0d691b419e63a82b2}\label{class_num_a195a2a68e1cce0d0d691b419e63a82b2} 
+\index{Num@{Num}!print@{print}}
+\index{print@{print}!Num@{Num}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily void Num\+::print (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{ot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+To print out the expression. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ot} & the outputstream to be written \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_expr}{Expr}}.
+
+\Hypertarget{class_num_af55ca9043b01c85dc636a7efa13e0450}\label{class_num_af55ca9043b01c85dc636a7efa13e0450} 
+\index{Num@{Num}!subst@{subst}}
+\index{subst@{subst}!Num@{Num}}
+\doxysubsubsection{\texorpdfstring{subst()}{subst()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_expr}{Expr}} \texorpdfstring{$\ast$}{*} Num\+::subst (\begin{DoxyParamCaption}\item[{std\+::string}]{s,  }\item[{\mbox{\hyperlink{class_expr}{Expr}} \texorpdfstring{$\ast$}{*}}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+If the first argument exists, it will be substitued with the second argument. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & the value to be substitued \\
+\hline
+{\em e} & the replacement \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Expression itself 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_expr}{Expr}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/christina/\+Desktop/\+MSD/\+CS6015/\+MSDScript/\+MSDScript/expr.\+hpp\item 
+/\+Users/christina/\+Desktop/\+MSD/\+CS6015/\+MSDScript/\+MSDScript/expr.\+cpp\end{DoxyCompactItemize}

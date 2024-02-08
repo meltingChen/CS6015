@@ -6,7 +6,10 @@
 
 #include "expr.hpp"
 
-
+/**
+* \brief Print out the result of print() function
+* \return string
+*/
 std::string Expr::to_string() {
     // Convert "" to a stringstream object
     std::stringstream st("");
@@ -14,21 +17,37 @@ std::string Expr::to_string() {
     return st.str();
 }
 
+/**
+* \brief Print out the result of pretty_print() function
+* \return string
+*/
 std::string Expr::to_pretty_string() {
     std::stringstream st("");
     this->pretty_print(st);
     return st.str();
 }
 
+/**
+* \brief Make the format better
+*/
 void Expr::pretty_print(std::ostream& ot) {
     pretty_print_at(ot, prec_none);
     
 }
 
+/**
+* \brief Constuctor of Num object
+* \param val the value of a Num object
+*/
 Num::Num(int val)  {
     this->val = val;
 }
 
+/**
+* \brief Compare whether two expression are equal
+* \param e an expressionto be compared
+* \return boolean
+*/
 bool Num::equals(Expr* e){
     Num *n = dynamic_cast<Num*>(e);
     
@@ -38,37 +57,69 @@ bool Num::equals(Expr* e){
     return this->val == n->val;
 }
 
+/**
+* \brief Interpret the value
+* \return int
+*/
 int Num::interp(){
     
     return this->val;
 }
 
+/**
+* \brief To check whether there are any variables in expressions
+* \return boolean
+*/
 bool Num::has_variable(){
     return false;
 }
 
 
+/**
+* \brief If the first argument exists, it will be substitued with the second argument
+* \param s the value to be substitued
+* \param e the replacement
+* \return Expression itself
+*/
 Expr* Num::subst(std::string s, Expr* e){
     
     return this;
 }
 
+/**
+* \brief To print out the expression
+* \param ot the outputstream to be written
+*/
 void Num::print(std::ostream& ot){
     
     ot<<std::to_string(val);
 }
 
+/**
+* \brief Helper funtion for pretty_print to decide where to add parentheses
+* \param ot the outputstream to be written
+* \param prec the order of importance
+*/
 void Num::pretty_print_at(std::ostream& ot,precedence_t prec ){
     this->print(ot);
 }
 
 
-
+/**
+* \brief Constuctor of Add object
+* \param lhs an Expr object on the right hand side
+* \param rhs an Expr object on the left hand side
+*/
 Add::Add(Expr *lhs, Expr *rhs){
     this->lhs = lhs;
     this->rhs = rhs;
 }
 
+/**
+* \brief Compare whether two expression are equal
+* \param e an expressionto be compared
+* \return boolean
+*/
 bool Add::equals(Expr* e){
     Add *n = dynamic_cast<Add*>(e);
     
@@ -79,6 +130,10 @@ bool Add::equals(Expr* e){
     return n->rhs->equals( this->rhs) && n->lhs->equals(this->lhs);
 }
 
+/**
+* \brief Interpret the value
+* \return int
+*/
 int Add::interp(){
 //    Num *lhs_num = dynamic_cast<Num*>(this->lhs);
 //    Num * rhs_num = dynamic_cast<Num*>(this->rhs);
@@ -87,17 +142,31 @@ int Add::interp(){
     
 }
 
+/**
+* \brief To check whether there are any variables in expressions
+* \return boolean
+*/
 bool Add::has_variable(){
     
     return ((this->lhs->has_variable()==true) || (this->rhs->has_variable()==true));
 }
 
+/**
+* \brief If the first argument exists, it will be substitued with the second argument
+* \param s the value to be substitued
+* \param e the replacement
+* \return Expression itself
+*/
 Expr* Add::subst(std::string s, Expr* e){
     //think recursively
     
     return new Add(this->lhs->subst(s, e), this->rhs->subst(s, e)) ;
 }
 
+/**
+* \brief To print out the expression
+* \param ot the outputstream to be written
+*/
 void Add::print(std::ostream& ot){
     
     ot << "(";
@@ -108,7 +177,11 @@ void Add::print(std::ostream& ot){
     
 }
 
-
+/**
+* \brief Helper funtion for pretty_print to decide where to add parentheses
+* \param ot the outputstream to be written
+* \param prec the order of importance
+*/
 void Add::pretty_print_at(std::ostream& ot,precedence_t prec ) {
     bool do_print = prec_add <= prec;
     if(do_print){
@@ -121,20 +194,16 @@ void Add::pretty_print_at(std::ostream& ot,precedence_t prec ) {
     if(do_print){
         ot<<")";
     }
-//    std::string result;
-//    if (prec >= prec_add) {
-//        result += "(";
-//    }
-//    result += lhs-> pretty_print(prec_add) + " + " + rhs-> pretty_print(prec_add);
-//    if (prec >= prec_add) {
-//        result += ")";
-//    }
-    
+
 }
    
 
 
-
+/**
+* \brief Constuctor of Mult object
+* \param lhs an Expr object on the right hand side
+* \param rhs an Expr object on the left hand side
+*/
 Mult::Mult(Expr* lhs, Expr* rhs){
     
     this->lhs = lhs;
@@ -142,6 +211,11 @@ Mult::Mult(Expr* lhs, Expr* rhs){
     
 }
 
+/**
+* \brief Compare whether two expression are equal
+* \param e an expressionto be compared
+* \return boolean
+*/
 bool Mult::equals(Expr *e){
     Mult *n = dynamic_cast<Mult*>(e);
     
@@ -152,6 +226,10 @@ bool Mult::equals(Expr *e){
     return n->rhs->equals( this->rhs) && n->lhs->equals(this->lhs);
 }
 
+/**
+* \brief Interpret the value
+* \return int
+*/
 int Mult::interp(){
    
 //    Num *lhs_num = dynamic_cast<Num*>(this->lhs);
@@ -161,16 +239,30 @@ int Mult::interp(){
     
 }
 
+/**
+* \brief To check whether there are any variables in expressions
+* \return boolean
+*/
 bool Mult::has_variable(){
    
     return ((this->lhs->has_variable()==true) || (this->rhs->has_variable()==true));
 }
 
+/**
+* \brief If the first argument exists, it will be substitued with the second argument
+* \param s the value to be substitued
+* \param e the replacement
+* \return Expression itself
+*/
 Expr* Mult::subst(std::string s, Expr* e){
     
     return new Mult(this->lhs->subst(s, e), this->rhs->subst(s, e));
 }
 
+/**
+* \brief To print out the expression
+* \param ot the outputstream to be written
+*/
 void Mult::print(std::ostream& ot) {
     ot << "(";
     lhs->print(ot);
@@ -179,7 +271,11 @@ void Mult::print(std::ostream& ot) {
     ot << ")";
 }
 
-
+/**
+* \brief Helper funtion for pretty_print to decide where to add parentheses
+* \param ot the outputstream to be written
+* \param prec the order of importance
+*/
 void Mult::pretty_print_at(std::ostream& ot,precedence_t prec ) {
     
     bool do_print = prec_mult <= prec;
@@ -197,13 +293,19 @@ void Mult::pretty_print_at(std::ostream& ot,precedence_t prec ) {
 
 }
 
-
-
-
+/**
+* \brief Constuctor of Var object
+* \param name the name of the Var object
+*/
 Var::Var(std::string name) {
     this -> name = name;
 }
 
+/**
+* \brief Compare whether two expression are equal
+* \param e an expressionto be compared
+* \return boolean
+*/
 bool Var::equals(Expr *e) {
     Var *n = dynamic_cast<Var*>(e);
     
@@ -214,14 +316,28 @@ bool Var::equals(Expr *e) {
     return this -> name == n -> name;
 }
 
+/**
+* \brief Interpret the value
+* \return int
+*/
 int Var::interp() {
     throw std::runtime_error("no value for variable");
 }
 
+/**
+* \brief To check whether there are any variables in expressions
+* \return boolean
+*/
 bool Var::has_variable(){
     return true;
 }
 
+/**
+* \brief If the first argument exists, it will be substitued with the second argument
+* \param s the value to be substitued
+* \param e the replacement
+* \return Expression itself
+*/
 Expr* Var::subst(std::string s, Expr* e){
     if(s == (this->name)){
         return e;
@@ -229,10 +345,19 @@ Expr* Var::subst(std::string s, Expr* e){
     return this;
 }
 
-void Var::print(std::ostream& output) {
-    output << this->name;
+/**
+* \brief To print out the expression
+* \param ot the outputstream to be written
+*/
+void Var::print(std::ostream& ot) {
+    ot << this->name;
 }
 
+/**
+* \brief Helper funtion for pretty_print to decide where to add parentheses
+* \param ot the outputstream to be written
+* \param prec the order of importance
+*/
 void Var::pretty_print_at(std::ostream& ot,precedence_t prec){
     this->print(ot);
 }

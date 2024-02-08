@@ -1,17 +1,14 @@
 //
 //  main.cpp
-//  MSDscript
+//  MSDScript
 //
-//  Created by 陳肜樺 on 1/14/24.
+//  Created by 陳肜樺 on 2/7/24.
 //
 
 #include <iostream>
-#include <string>
-#include "cmdline.hpp"
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    
-    use_arguments(argc, argv);
+    std::cout << "Hello, World!\n";
     return 0;
 }

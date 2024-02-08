@@ -1,9 +1,6 @@
-//
-//  expr.hpp
-//  MSDscript
-//
-//  Created by 陳肜樺 on 1/22/24.
-//
+/**
+* \classes expr
+*/
 
 #ifndef expr_hpp
 #define expr_hpp
@@ -40,7 +37,7 @@ public:
 
 class Num : public Expr {
 public:
-    int val;
+    int val;///< the value of a Num object
     Num(int val);
     bool equals(Expr *e) override;
     int interp() override;
@@ -53,7 +50,8 @@ public:
 
 class Add : public Expr {
 public:
-    Expr *lhs; Expr *rhs;
+    Expr *lhs; ///< an Expr object on the left hand side
+    Expr *rhs; ///< an Expr object on the right hand side
     Add(Expr *lhs, Expr *rhs);
     bool equals(Expr* e) override;
     int interp()override;
@@ -66,7 +64,8 @@ public:
 
 class Mult : public Expr{
 public:
-    Expr *lhs; Expr *rhs;
+    Expr *lhs;///< an Expr object on the left hand side
+    Expr *rhs;///< an Expr object on the right hand side
     Mult(Expr *lhs, Expr *rhs);
     bool equals(Expr *e) override;
     int interp()override;
@@ -79,7 +78,7 @@ public:
 
 class Var : public Expr {
 public:
-    std::string name;
+    std::string name;///< the name of an Var object
 
     Var(std::string name);
     bool equals(Expr *e) override;

@@ -18,3 +18,5 @@ clean:
 
 .PHONY:clean
 	
+doc: msdscript
+	cd documentation && doxygen
