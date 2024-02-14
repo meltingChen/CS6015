@@ -2,7 +2,7 @@
 //  cmdline.cpp
 //  MSDscript
 //
-//  Created by 陳肜樺 on 1/14/24.
+//  Created by on 1/14/24.
 //
 
 #define CATCH_CONFIG_RUNNER

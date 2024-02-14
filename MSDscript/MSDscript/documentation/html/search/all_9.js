@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['subst_0',['subst',['../class_num.html#af55ca9043b01c85dc636a7efa13e0450',1,'Num::subst()'],['../class_add.html#a0149ec7316da26daf89f1c081b1ee821',1,'Add::subst()'],['../class_mult.html#acd883793e07c0e7e290dd7038d365c77',1,'Mult::subst()'],['../class_var.html#a4958915c8dcabb470425a5924639740a',1,'Var::subst()']]]
+  ['lazyexpression_0',['LazyExpression',['../class_catch_1_1_lazy_expression.html',1,'Catch']]],
+  ['lhs_1',['lhs',['../class_add.html#a15ee8d84bb8a04af294732ebe1a8a6c3',1,'Add::lhs'],['../class_mult.html#a9e2acda98ce8c008004b39f1f76e7eab',1,'Mult::lhs']]]
 ];

@@ -1,4 +1,11 @@
 var searchData=
 [
-  ['has_5fvariable_0',['has_variable',['../class_num.html#a24a51278e76d4b01b457fb5f521bcc38',1,'Num::has_variable()'],['../class_add.html#a1a829a6c1e949a57cd810e8a6e3c52d5',1,'Add::has_variable()'],['../class_mult.html#a214c39d71da10d21bdbd7fbc70032357',1,'Mult::has_variable()'],['../class_var.html#a8fdfa306660b048eff151d156b923dd6',1,'Var::has_variable()']]]
+  ['capturer_0',['Capturer',['../class_catch_1_1_capturer.html',1,'Catch']]],
+  ['casedstring_1',['CasedString',['../struct_catch_1_1_matchers_1_1_std_string_1_1_cased_string.html',1,'Catch::Matchers::StdString']]],
+  ['casesensitive_2',['CaseSensitive',['../struct_catch_1_1_case_sensitive.html',1,'Catch']]],
+  ['catch_5fglobal_5fnamespace_5fdummy_3',['Catch_global_namespace_dummy',['../struct_catch__global__namespace__dummy.html',1,'']]],
+  ['chunkgenerator_4',['ChunkGenerator',['../class_catch_1_1_generators_1_1_chunk_generator.html',1,'Catch::Generators']]],
+  ['containselementmatcher_5',['ContainsElementMatcher',['../struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher.html',1,'Catch::Matchers::Vector']]],
+  ['containsmatcher_6',['ContainsMatcher',['../struct_catch_1_1_matchers_1_1_std_string_1_1_contains_matcher.html',1,'Catch::Matchers::StdString::ContainsMatcher'],['../struct_catch_1_1_matchers_1_1_vector_1_1_contains_matcher.html',1,'Catch::Matchers::Vector::ContainsMatcher&lt; T, AllocComp, AllocMatch &gt;']]],
+  ['counts_7',['Counts',['../struct_catch_1_1_counts.html',1,'Catch']]]
 ];
