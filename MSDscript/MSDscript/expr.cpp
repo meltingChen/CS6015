@@ -79,10 +79,10 @@ void Let::print(std::ostream& ot){
     ot << ")";
     
 }
-void Let::pretty_print_at(std::ostream& ot,precedence_t prec, std::streampos& newLinePos, bool print_outer)
+void Let::pretty_print_at(std::ostream& ot,precedence_t prec, std::streampos& newLinePos, bool add_let_paren)
 {
     
-    if(print_outer){
+    if(add_let_paren){
         ot << "(";
     }
     std::streampos curr = ot.tellp() - newLinePos;
@@ -97,7 +97,7 @@ void Let::pretty_print_at(std::ostream& ot,precedence_t prec, std::streampos& ne
     
     rhs -> pretty_print_at(ot,prec_none,before_in,false);
 
-    if(print_outer){
+    if(add_let_paren){
         ot<<")";
     }
 }
@@ -171,7 +171,7 @@ void Num::print(std::ostream& ot){
  * \param ot the outputstream to be written
  * \param prec the order of importance
  */
-void Num::pretty_print_at(std::ostream& ot,precedence_t prec, std::streampos& newLinePrevPos,bool print_outer ){
+void Num::pretty_print_at(std::ostream& ot,precedence_t prec, std::streampos& newLinePrevPos,bool add_let_paren ){
     this->print(ot);
 }
 
@@ -253,7 +253,7 @@ void Add::print(std::ostream& ot){
  * \param ot the outputstream to be written
  * \param prec the order of importance
  */
-void Add::pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& newLinePos,bool print_outer ) {
+void Add::pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& newLinePos,bool add_let_paren ) {
     bool do_print = prec_add <= prec;
 
     if(do_print){
@@ -262,7 +262,7 @@ void Add::pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& new
     lhs->pretty_print_at(ot, prec_add,newLinePos,true);
     ot<<" + ";
     // operators associate to the right
-    rhs -> pretty_print_at(ot, prec_none, newLinePos, print_outer);
+    rhs -> pretty_print_at(ot, prec_none, newLinePos, add_let_paren);
     if(do_print){
         ot<<")";
     }
@@ -348,10 +348,10 @@ void Mult::print(std::ostream& ot) {
  * \param ot the outputstream to be written
  * \param prec the order of importance
  */
-void Mult::pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& newLinePos,bool print_outer ) {
+void Mult::pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& newLinePos,bool add_let_paren ) {
     
     bool do_print = prec_mult <= prec;
-    bool let_print = print_outer;
+    bool let_print = add_let_paren;
     if(do_print){
         ot<<"(";
         let_print = false;
@@ -432,7 +432,7 @@ void Var::print(std::ostream& ot) {
  * \param ot the outputstream to be written
  * \param prec the order of importance
  */
-void Var::pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& newLinePos,bool print_outer){
+void Var::pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& newLinePos,bool add_let_paren){
     this->print(ot);
 }
 

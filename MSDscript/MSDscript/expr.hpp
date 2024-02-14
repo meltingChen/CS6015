@@ -32,7 +32,7 @@ public:
     std::string to_string();
     void pretty_print(std::ostream& ot);
     std::string to_pretty_string();
-    virtual void pretty_print_at(std::ostream& ot,precedence_t prec ,std::streampos& newLinePos,bool print_outer)=0;
+    virtual void pretty_print_at(std::ostream& ot,precedence_t prec ,std::streampos& newLinePos,bool add_let_paren)=0;
 };
 
 class Let: public Expr{
@@ -46,7 +46,7 @@ public:
     bool has_variable()override;
     Expr* subst(std::string s, Expr* e)override;
     void print(std::ostream& ot)override;
-    void pretty_print_at(std::ostream& ot,precedence_t prec, std::streampos& newLinePos ,bool print_outer)override;
+    void pretty_print_at(std::ostream& ot,precedence_t prec, std::streampos& newLinePos ,bool add_let_paren)override;
 };
 
 class Num : public Expr {
@@ -58,7 +58,7 @@ public:
     bool has_variable()override;
     Expr* subst(std::string s, Expr* e)override;
     void print(std::ostream& ot)override;
-    void pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& newLinePos,bool print_outer)override;
+    void pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& newLinePos,bool add_let_paren)override;
 };
 
 class Add : public Expr {
@@ -71,7 +71,7 @@ public:
     bool has_variable()override;
     Expr* subst(std::string s, Expr* e)override;
     void print(std::ostream& ot)override;
-    void pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& newLinePos,bool print_outer)override;
+    void pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& newLinePos,bool add_let_paren)override;
     
 };
 
@@ -85,7 +85,7 @@ public:
     bool has_variable()override;
     Expr* subst(std::string s, Expr* e)override;
     void print(std::ostream& ot)override;
-    void pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& newLinePos ,bool print_outer)override;
+    void pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& newLinePos ,bool add_let_paren)override;
     
 };
 
@@ -99,7 +99,7 @@ public:
     bool has_variable()override;
     Expr* subst(std::string s, Expr* e)override;
     void print(std::ostream& ot)override;
-    void pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& newLinePos ,bool print_outer)override;
+    void pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& newLinePos ,bool add_let_paren)override;
 };
 
 #endif /* expr_hpp */
