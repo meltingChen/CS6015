@@ -32,7 +32,7 @@ std::string Expr::to_pretty_string() {
  */
 void Expr::pretty_print(std::ostream& ot) {
     std::streampos pos = ot.tellp();
-    pretty_print_at(ot, prec_none,pos,false);
+    pretty_print_at(ot, prec_none ,pos,false);
 }
 
 
@@ -93,7 +93,6 @@ void Let::pretty_print_at(std::ostream& ot,precedence_t prec, std::streampos& ne
     ot<<std::string(curr,' ');
     
     ot<<"_in  ";
-
     
     rhs -> pretty_print_at(ot,prec_none,before_in,false);
 
@@ -438,8 +437,6 @@ void Var::pretty_print_at(std::ostream& ot,precedence_t prec,std::streampos& new
 
 
 
-
-
 TEST_CASE("Tests"){
     SECTION("HW2"){
         //Check Num class
@@ -603,6 +600,7 @@ TEST_CASE("Tests"){
             CHECK ((new Add(new Let("x", new Num(3), new Let("y", new Num(3), new Add(new Var("y"), new Num(2))) ), new Var("x")))->to_pretty_string() == "(_let x = 3\n"
                    " _in  _let y = 3\n"
                    "      _in  y + 2) + x");
+//            CHECK( (new Let("x", new Var("x"), new Var("x")))->subst("x", new Num(2)) ->equals(new Let("x", new Num(2), new Var("x"))) );
             //this code block just allows for the printing of some statements to the terminal. Also used for debugging.
             
             //            std::cout << (new Add(new _let("x", new Num(3), new _let("y", new Num(3), new Add(new Var("y"), new Num(2))) ), new Var("x")))->to_pretty_string();

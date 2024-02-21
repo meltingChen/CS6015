@@ -12,6 +12,7 @@
 		CF7AA4322B7486DF00EE6ED9 /* expr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF7AA42E2B7486DF00EE6ED9 /* expr.cpp */; };
 		CF7AA4332B7486DF00EE6ED9 /* makefile in Sources */ = {isa = PBXBuildFile; fileRef = CF7AA42F2B7486DF00EE6ED9 /* makefile */; };
 		CF7AA4342B7486DF00EE6ED9 /* cmdline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF7AA4302B7486DF00EE6ED9 /* cmdline.cpp */; };
+		CF8AB4A82B856FFA00B818C4 /* parse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF8AB4A72B856FFA00B818C4 /* parse.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,6 +39,8 @@
 		CF7AA42E2B7486DF00EE6ED9 /* expr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = expr.cpp; sourceTree = "<group>"; };
 		CF7AA42F2B7486DF00EE6ED9 /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
 		CF7AA4302B7486DF00EE6ED9 /* cmdline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cmdline.cpp; sourceTree = "<group>"; };
+		CF8AB4A22B85234D00B818C4 /* parse.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = parse.hpp; sourceTree = "<group>"; };
+		CF8AB4A72B856FFA00B818C4 /* parse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parse.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +77,8 @@
 				CF7AA42C2B7486DF00EE6ED9 /* catch.h */,
 				CF7AA4302B7486DF00EE6ED9 /* cmdline.cpp */,
 				CF7AA42B2B7486DF00EE6ED9 /* cmdline.hpp */,
+				CF8AB4A72B856FFA00B818C4 /* parse.cpp */,
+				CF8AB4A22B85234D00B818C4 /* parse.hpp */,
 				CF7AA4282B7486DF00EE6ED9 /* documentation */,
 				CF7AA42E2B7486DF00EE6ED9 /* expr.cpp */,
 				CF7AA42A2B7486DF00EE6ED9 /* expr.hpp */,
@@ -145,6 +150,7 @@
 				CF7AA4222B74866500EE6ED9 /* main.cpp in Sources */,
 				CF7AA4342B7486DF00EE6ED9 /* cmdline.cpp in Sources */,
 				CF7AA4332B7486DF00EE6ED9 /* makefile in Sources */,
+				CF8AB4A82B856FFA00B818C4 /* parse.cpp in Sources */,
 				CF7AA4322B7486DF00EE6ED9 /* expr.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
