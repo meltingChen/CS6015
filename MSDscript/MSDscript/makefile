@@ -18,7 +18,17 @@ expr.o:expr.cpp expr.hpp catch.h
 	
 parse.o:parse.cpp parse.hpp catch.h
 	$(CXX) $(CXXFLAGS) -c  parse.cpp
+	
+.PHONY:test_msdscript
+test_msdscript: exec.o test_msdscript.o
+	$(CXX) $(CXXFLAGS) exec.o test_msdscript.o -o test_msdscript
 
+test_msdscript.o: test_msdscript.cpp test_msdscript.hpp expr.hpp exec.h exec.cpp
+	$(CXX) $(CXXFLAGS) -c test_msdscript.cpp
+
+#exec.o: exec.cpp exec.h
+#	$(CXX) $(CXXFLAGS) -c exec.cpp
+	
 clean:
 	rm -f *.o msdscript.out
 

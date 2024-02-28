@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CF7AA4222B74866500EE6ED9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF7AA4212B74866500EE6ED9 /* main.cpp */; };
 		CF7AA4312B7486DF00EE6ED9 /* TestPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7AA42D2B7486DF00EE6ED9 /* TestPlan.m */; };
 		CF7AA4322B7486DF00EE6ED9 /* expr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF7AA42E2B7486DF00EE6ED9 /* expr.cpp */; };
 		CF7AA4332B7486DF00EE6ED9 /* makefile in Sources */ = {isa = PBXBuildFile; fileRef = CF7AA42F2B7486DF00EE6ED9 /* makefile */; };
 		CF7AA4342B7486DF00EE6ED9 /* cmdline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF7AA4302B7486DF00EE6ED9 /* cmdline.cpp */; };
 		CF8AB4A82B856FFA00B818C4 /* parse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF8AB4A72B856FFA00B818C4 /* parse.cpp */; };
+		CF8AB4C52B881B2200B818C4 /* exec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF8AB4C22B881B2100B818C4 /* exec.cpp */; };
+		CF8AB4C62B881B2200B818C4 /* test_msdscript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF8AB4C42B881B2200B818C4 /* test_msdscript.cpp */; };
+		CF8AB4C92B881B9200B818C4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF8AB4C72B881B9200B818C4 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,7 +31,6 @@
 
 /* Begin PBXFileReference section */
 		CF7AA41E2B74866500EE6ED9 /* MSDScript */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MSDScript; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF7AA4212B74866500EE6ED9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CF7AA4282B7486DF00EE6ED9 /* documentation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = documentation; sourceTree = "<group>"; };
 		CF7AA4292B7486DF00EE6ED9 /* Testing */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Testing; sourceTree = "<group>"; };
 		CF7AA42A2B7486DF00EE6ED9 /* expr.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = expr.hpp; sourceTree = "<group>"; };
@@ -41,6 +42,11 @@
 		CF7AA4302B7486DF00EE6ED9 /* cmdline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cmdline.cpp; sourceTree = "<group>"; };
 		CF8AB4A22B85234D00B818C4 /* parse.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = parse.hpp; sourceTree = "<group>"; };
 		CF8AB4A72B856FFA00B818C4 /* parse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parse.cpp; sourceTree = "<group>"; };
+		CF8AB4C22B881B2100B818C4 /* exec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = exec.cpp; sourceTree = "<group>"; };
+		CF8AB4C32B881B2100B818C4 /* exec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exec.h; sourceTree = "<group>"; };
+		CF8AB4C42B881B2200B818C4 /* test_msdscript.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_msdscript.cpp; sourceTree = "<group>"; };
+		CF8AB4C72B881B9200B818C4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		CF8AB4CA2B881C8C00B818C4 /* test_msdscript.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = test_msdscript.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +79,11 @@
 		CF7AA4202B74866500EE6ED9 /* MSDScript */ = {
 			isa = PBXGroup;
 			children = (
-				CF7AA4212B74866500EE6ED9 /* main.cpp */,
+				CF8AB4CA2B881C8C00B818C4 /* test_msdscript.hpp */,
+				CF8AB4C72B881B9200B818C4 /* main.cpp */,
+				CF8AB4C22B881B2100B818C4 /* exec.cpp */,
+				CF8AB4C32B881B2100B818C4 /* exec.h */,
+				CF8AB4C42B881B2200B818C4 /* test_msdscript.cpp */,
 				CF7AA42C2B7486DF00EE6ED9 /* catch.h */,
 				CF7AA4302B7486DF00EE6ED9 /* cmdline.cpp */,
 				CF7AA42B2B7486DF00EE6ED9 /* cmdline.hpp */,
@@ -146,11 +156,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF8AB4C52B881B2200B818C4 /* exec.cpp in Sources */,
 				CF7AA4312B7486DF00EE6ED9 /* TestPlan.m in Sources */,
-				CF7AA4222B74866500EE6ED9 /* main.cpp in Sources */,
+				CF8AB4C62B881B2200B818C4 /* test_msdscript.cpp in Sources */,
 				CF7AA4342B7486DF00EE6ED9 /* cmdline.cpp in Sources */,
 				CF7AA4332B7486DF00EE6ED9 /* makefile in Sources */,
 				CF8AB4A82B856FFA00B818C4 /* parse.cpp in Sources */,
+				CF8AB4C92B881B9200B818C4 /* main.cpp in Sources */,
 				CF7AA4322B7486DF00EE6ED9 /* expr.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

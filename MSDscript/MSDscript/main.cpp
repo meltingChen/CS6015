@@ -35,7 +35,7 @@ int main(int argc, const char * argv[]) {
     
 //    std::cout << (new Let("x", new Num(5), new Let("y", new Num(6), new Add(new Var("x"), new Num(1))))) ->to_pretty_string();
 //    std::cout<< parse_str("-")->to_string()<<std::endl;
-    std::cout<<parse_str(" -   5  ")->to_string()<<std::endl;
+//    std::cout<<parse_str(" -   5  ")->to_string()<<std::endl;
     
     return 0;
 }

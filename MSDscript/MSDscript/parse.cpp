@@ -44,13 +44,9 @@ Expr *parse_num(std::istream &inn) {
         if (isdigit(c))
         {
             consume(inn, c);
-            n = n*10 + (c - '0');
+            n = n * 10 + (c - '0');
             tracker = true;
         }
-        
-        //        if(!isdigit(c) and negative){
-        //            throw std::runtime_error("invalid input");
-        //        }
         
         else
             break;
@@ -69,6 +65,7 @@ Expr *parse_num(std::istream &inn) {
 Expr* parse_addend(std::istream &in){
     
     skip_whitespace(in);
+    //
     Expr* e = parse_multicand(in);
     skip_whitespace(in);
     
@@ -76,6 +73,7 @@ Expr* parse_addend(std::istream &in){
     
     if(c == '*'){
         consume(in, '*');
+        // recursively call
         Expr* rhs = parse_addend(in);
         return new Mult(e,rhs);
     }
@@ -88,19 +86,31 @@ Expr* parse_addend(std::istream &in){
 Expr* parse_multicand(std::istream& in){
     skip_whitespace(in);
     int c = in.peek();
-    if ((c == '-') || isdigit(c)){
+    
+    // Num class
+    if
+        ((c == '-') or isdigit(c))
+    {
         return parse_num(in);
-    } else if (isalpha(c)){
+    }
+    
+    // Var class
+    else if (isalpha(c)){
         return parse_var(in);
-    } else if (c == '_'){
+    }
+    // Let class
+    else if (c == '_'){
         return parse_let(in);
-    } else if (c == '(') {
+    }
+    
+    // whether RHS 
+    else if (c == '(') {
         consume(in, '(');
         Expr *e = parse_expr(in);
         skip_whitespace(in);
         c = in.get();
         if (c != ')')
-            throw std::runtime_error("missing close parenthesis");
+            throw std::runtime_error("missing )");
         return e;
     } else {
         consume(in, c);
@@ -118,6 +128,7 @@ Expr* parse_var(std::istream& in) {
     }
     const std::set<char> operators = {'+', '*', '=', '(', ')'};
     
+    // invalid variable - check if there is operators above exists
     if (c != -1 and !isspace(c) and operators.find(c) == operators.end()) {
         throw std::runtime_error("invalid input");
     }
@@ -132,7 +143,7 @@ Expr* parse_let(std::istream& in) {
     Expr* temp = parse_var(in);
     Var* var = dynamic_cast<Var*>(temp);
     if (var == NULL) {
-        throw std::runtime_error("wrong format for let expression");
+        throw std::runtime_error("invalid input for let expression");
     }
     skip_whitespace(in);
     
@@ -177,7 +188,7 @@ TEST_CASE("parse") {
     CHECK( parse_str("(1)")->equals(new Num(1)) );
     CHECK( parse_str("(((1)))")->equals(new Num(1)) );
     
-    CHECK_THROWS_WITH( parse_str("(1"), "missing close parenthesis" );
+    CHECK_THROWS_WITH( parse_str("(1"), "missing )" );
     
     CHECK( parse_str("1")->equals(new Num(1)) );
     CHECK( parse_str("10")->equals(new Num(10)) );
@@ -210,6 +221,8 @@ TEST_CASE("parse") {
     CHECK( parse_str("z * (x + y)")
           ->equals(new Mult(new Var("z"),
                             new Add(new Var("x"), new Var("y"))) ));
-    
+    //terry
+    CHECK( (new Let("x", new Num(1), new Let("x", new Num(2), new Var("x")))) ->interp() == 2 );
+
 };
 

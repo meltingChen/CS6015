@@ -92,7 +92,7 @@ void Let::pretty_print_at(std::ostream& ot,precedence_t prec, std::streampos& ne
     std::streampos before_in = ot.tellp();
     ot<<std::string(curr,' ');
     
-    ot<<"_in  ";
+    ot<<"_in ";
     
     rhs -> pretty_print_at(ot,prec_none,before_in,false);
 
@@ -205,9 +205,7 @@ bool Add::equals(Expr* e){
  * \return int
  */
 int Add::interp(){
-    //    Num *lhs_num = dynamic_cast<Num*>(this->lhs);
-    //    Num * rhs_num = dynamic_cast<Num*>(this->rhs);
-    
+   
     return lhs -> interp()  + rhs -> interp();
     
 }
@@ -303,8 +301,7 @@ bool Mult::equals(Expr *e){
  */
 int Mult::interp(){
     
-    //    Num *lhs_num = dynamic_cast<Num*>(this->lhs);
-    //    Num * rhs_num = dynamic_cast<Num*>(this->rhs);
+    
     return this-> lhs -> interp()  * this->rhs->interp();
     
     
@@ -560,31 +557,31 @@ TEST_CASE("Tests"){
               ->interp()==7
               );
         CHECK((new Let("x", new Add(new Num(5), new Num(2)), new Add(new Var("x"), new Num(1) )))->interp()==8);
-        CHECK((new Let("x", new Num(5), new Add(new Var("x"), new Num(3))))->to_pretty_string() ==  "_let x = 5\n_in  x + 3");
+        CHECK((new Let("x", new Num(5), new Add(new Var("x"), new Num(3))))->to_pretty_string() ==  "_let x = 5\n_in x + 3");
         //        /Let nested as right argument of parenthesized multiplication expression
         SECTION("test pretty print"){
             //Let nested as right argument of parenthesized multiplication expression
             CHECK ( (new Mult(new Mult(new Num (2), new Let("x", new Num(5), new Add(new Var("x") , new Num(1)) )), new Num(3)))->to_pretty_string() == "(2 * _let x = 5\n"
-                   "     _in  x + 1) * 3");
+                   "     _in x + 1) * 3");
             //Let nested to the left in add expression which is nested to the right within a multiplication expression
             CHECK((new Mult(new Num(5), new Add(new Let("x", new Num(5), new Var("x")), new Num(1))))->to_pretty_string() == "5 * ((_let x = 5\n"
-                  "      _in  x) + 1)");
+                  "      _in x) + 1)");
             //Let in lhs of add
             CHECK ( (new Add(new Let("x", new Num(2), new Add(new Var("x"), new Num(9))), new Num(4)))->to_pretty_string() == "(_let x = 2\n"
-                   " _in  x + 9) + 4");
+                   " _in x + 9) + 4");
             //Let in lhs of multiplication expression
             CHECK((new Mult(new Let("x", new Num(5), new Add(new Var("x"), new Num(8))), new Num(3)))->to_pretty_string() == "(_let x = 5\n"
-                  " _in  x + 8) * 3");
+                  " _in x + 8) * 3");
             //Let nest as right argument of un-parenthesized multiplication expression
             CHECK((new Add (new Mult(new Num(4), new Let("x", new Num(5), new Add(new Var("x"), new Num(1)))), new Num(9)))->to_pretty_string() == "4 * (_let x = 5\n"
-                  "     _in  x + 1) + 9");
+                  "     _in x + 1) + 9");
             
             
             //Let nested in lhs of Add expression nested within body of let expression
             CHECK((new Let("x", new Num(5), new Add(new Let("y" , new Num(3), new Add(new Var("y"), new Num(2))), new Var("x"))))
                   ->to_pretty_string() == "_let x = 5\n"
-                  "_in  (_let y = 3\n"
-                  "      _in  y + 2) + x");
+                  "_in (_let y = 3\n"
+                  "     _in y + 2) + x");
             
             
             
@@ -593,14 +590,16 @@ TEST_CASE("Tests"){
                                               new Add( new Var("y"), new Let("z",new Num(6),
                                                                              new Add(new Var("a"), new Num(8))) ) ), new Var("x") ) ) )
                   ->to_pretty_string()== "_let x = 5\n"
-                  "_in  (_let y = 3\n"
-                  "      _in  y + _let z = 6\n"
-                  "               _in  a + 8) + x" );
+                  "_in (_let y = 3\n"
+                  "     _in y + _let z = 6\n"
+                  "             _in a + 8) + x" );
             
             CHECK ((new Add(new Let("x", new Num(3), new Let("y", new Num(3), new Add(new Var("y"), new Num(2))) ), new Var("x")))->to_pretty_string() == "(_let x = 3\n"
-                   " _in  _let y = 3\n"
-                   "      _in  y + 2) + x");
-//            CHECK( (new Let("x", new Var("x"), new Var("x")))->subst("x", new Num(2)) ->equals(new Let("x", new Num(2), new Var("x"))) );
+                " _in _let y = 3\n"
+                "     _in y + 2) + x");
+            
+            
+            
             //this code block just allows for the printing of some statements to the terminal. Also used for debugging.
             
             //            std::cout << (new Add(new _let("x", new Num(3), new _let("y", new Num(3), new Add(new Var("y"), new Num(2))) ), new Var("x")))->to_pretty_string();
@@ -611,5 +610,95 @@ TEST_CASE("Tests"){
         }
         
         
+        
+        SECTION("nabil"){
+            CHECK( (new Let("x", new Num(5), new Var("x")))
+                  ->to_pretty_string()
+                  == ((std::string)"" +
+                      "_let x = 5\n" +
+                      "_in x") );
+            CHECK( (new Let("x", new Num(5),
+                            new Add(new Let("y", new Num(3),
+                                            new Add(new Var("y"), new Num(2))),
+                                    new Var("x"))))
+                  ->to_pretty_string()
+                  == ((std::string)"" +
+                      "_let x = 5\n" +
+                      "_in (_let y = 3\n" +
+                      "     _in y + 2) + x") );
+            CHECK( (new Let("x", new Num(5),
+                            new Add(new Var("x"),
+                                    new Let("y", new Num(3),
+                                            new Add(new Var("y"), new Num(2))))))
+                  ->to_pretty_string()
+                  == ((std::string)"" +
+                      "_let x = 5\n" +
+                      "_in x + _let y = 3\n" +
+                      "        _in y + 2") );
+            CHECK( (new Let("x", new Num(5),
+                            new Mult(new Let("y", new Num(3),
+                                             new Mult(new Var("y"), new Num(2))),
+                                     new Var("x"))))
+                  ->to_pretty_string()
+                  == ((std::string)"" +
+                      "_let x = 5\n" +
+                      "_in (_let y = 3\n" +
+                      "     _in y * 2) * x") );
+            CHECK( (new Let("x", new Num(5),
+                            new Mult(new Var("x"),
+                                     new Let("y", new Num(3),
+                                             new Mult(new Var("y"), new Num(2))))))
+                  ->to_pretty_string()
+                  == ((std::string)"" +
+                      "_let x = 5\n" +
+                      "_in x * _let y = 3\n" +
+                      "        _in y * 2") );
+            CHECK( (new Let("x", new Let("z", new Num(8),
+                                         new Var("z")),
+                            new Let("y", new Num(3),
+                                    new Add(new Var("y"), new Var("x")))))
+                  ->to_pretty_string()
+                  == ((std::string)"" +
+                      "_let x = _let z = 8\n" +
+                      "         _in z\n" +
+                      "_in _let y = 3\n" +
+                      "    _in y + x") );
+            CHECK( (new Add(new Mult(new Num(5),
+                                     new Let("x", new Num(5), new Var("x"))),
+                            new Num(1)))
+                  ->to_pretty_string()
+                  == ((std::string)"" +
+                      "5 * (_let x = 5\n" +
+                      "     _in x) + 1") );
+            CHECK( (new Mult(new Mult(new Num(5),
+                                      new Let("x", new Num(5), new Var("x"))),
+                             new Num(3)))
+                  ->to_pretty_string()
+                  == ((std::string)"" +
+                      "(5 * _let x = 5\n" +
+                      "     _in x) * 3") );
+            CHECK( (new Add(new Num(1),
+                            new Add(new Let("x", new Num(5), new Var("x")),
+                                    new Num(2))))
+                  ->to_pretty_string()
+                  == ((std::string)"" +
+                      "1 + (_let x = 5\n" +
+                      "     _in x) + 2") );
+            CHECK ((new Add(new Let("x", new Num(3), new Let("y", new Num(3), new Add(new Var("y"), new Num(2))) ), new Var("x")))->to_pretty_string() ==
+                   "(_let x = 3\n"
+                   " _in _let y = 3\n"
+                   "     _in y + 2) + x" );
+            CHECK((new Let("x", new Num(5), new Add(new Let("y" , new Num(3), new Add(new Var("y"), new Num(2))), new Var("x"))))
+                  ->to_pretty_string() ==
+                  "_let x = 5\n"
+                  "_in (_let y = 3\n"
+                  "     _in y + 2) + x");
+            CHECK( ( new Let( "x", new Num(5), new Add( new Let( "y", new Num(3), new Add( new Var("y"), new Let("z",new Num(6), new Add(new Var("a"), new Num(8))) ) ), new Var("x") ) ) )
+                  ->to_pretty_string()==
+                  "_let x = 5\n"
+                  "_in (_let y = 3\n"
+                  "     _in y + _let z = 6\n"
+                  "             _in a + 8) + x" );
+        }
     }
 };
